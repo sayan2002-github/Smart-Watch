@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Alkalami&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+} 
+
+#day{
+    color: red;
+    margin-bottom: 40px;
+    font-size: 2em;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px red,
+    0 0 60px red;
+}
+
+#time{
+    gap: 40px;
+    color: white;
+}
+
+#time .circle{
+    height: 150px;
+    width: 150px;
+}
+
+#time .dots{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+#time .dots::before{
+    content: '';
+    position: absolute;
+    top: -3px;
+    height: 15px;
+    width: 15px;
+    background: var(--clr);
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--clr),
+    0 0 60px var(--clr);
+}
+
+#time .circle svg{
+    height: 150px;
+    width: 150px;
+    transform: rotate(270deg);
+}
+
+#time .circle svg circle{
+    height: 100%;
+    width: 100%;
+    fill: transparent;
+    stroke: #191919;
+    stroke-width: 4;
+    transform: translate(5px, 5px);
+}
+
+#time .circle svg circle:nth-child(2){
+    stroke: var(--clr);
+    stroke-dasharray: 440;
+}
+
+#time div{
+    position: absolute;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.5em;
+}
+
+#time div span{
+    position: absolute;
+    transform: translateX(-50%) translateY(-8px);
+    font-size: 0.4em;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+#time .ampm{
+    transform: translateX(-20px);
+}
+
+#time #apm{
+    font-size: 1em;
+    text-shadow: 0 0 4px ;
+    letter-spacing: 1px;
+}
+
+#fullDate{
+    gap: 10px;
+    margin-top: 30px;
+    font-size: 2em;
+    font-weight: 500;
+    color: aquamarine;
+    text-shadow: 0 0 20px aquamarine,
+    0 0 40px aquamarine;
+}
+
+section{
+    height: 90vh;
+}

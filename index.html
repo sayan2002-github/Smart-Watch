@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/style.css">
+    <link rel="shortcut icon" href="./static/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <title>Smart Watch | Digital Clock</title>
+</head>
+
+<body style="background-color: #2f363e;">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1f1f1f;">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex justify-content-center align-items-center" href="#">
+                    <img src="./images/main-logo-2.png" alt="" width="38" height="30">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Digital Clock</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./analog.html">Analoge Clock</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./stop.html">Stopwatch</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="d-flex flex-column justify-content-center align-items-center">
+        <div class="container d-flex justify-content-center align-items-center mb-10" id="day">
+            DAY
+        </div>
+        <div id="time" class="d-flex">
+            <div class="circle position-relative d-flex justify-content-center align-items-center"
+                style="--clr:#ff2972;">
+                <div class="dots hr_dot d-flex justify-content-center"></div>
+                <svg class="position-relative">
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70" id="hh"></circle>
+                </svg>
+                <div id="hours">00</div>
+            </div>
+            <div class="circle position-relative d-flex justify-content-center align-items-center"
+                style="--clr:#fee800;">
+                <div class="dots min_dot d-flex justify-content-center"></div>
+                <svg class="position-relative">
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70" id="mm"></circle>
+                </svg>
+                <div id="minutes">00</div>
+            </div>
+            <div class="circle position-relative d-flex justify-content-center align-items-center"
+                style="--clr:#04fc43;">
+                <div class="dots sec_dot d-flex justify-content-center"></div>
+                <svg class="position-relative">
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70" id="ss"></circle>
+                </svg>
+                <div id="seconds">00</div>
+            </div>
+            <div class="ampm position-relative">
+                <div id="apm">AM</div>
+            </div>
+        </div>
+        <div class="container d-flex justify-content-center align-items-center" id="fullDate">
+            <div id="date">00</div>
+            <div id="month">00</div>
+            <div id="year">0000</div>
+        </div>
+    </section>
+
+    <script>
+        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        let day = document.getElementById('day');
+        let hours = document.getElementById('hours');
+        let minutes = document.getElementById('minutes');
+        let seconds = document.getElementById('seconds');
+        let ampm = document.getElementById('apm');
+        let date = document.getElementById('date');
+        let month = document.getElementById('month');
+        let year = document.getElementById('year');
+
+        let hh = document.getElementById('hh');
+        let mm = document.getElementById('mm');
+        let ss = document.getElementById('ss');
+
+        let hr_dot = document.querySelector('.hr_dot');
+        let min_dot = document.querySelector('.min_dot');
+        let sec_dot = document.querySelector('.sec_dot');
+
+        setInterval(() => {
+            let d = new Date().getDay();
+            let h = new Date().getHours();
+            let m = new Date().getMinutes();
+            let s = new Date().getSeconds();
+            let am = h >= 12 ? 'PM' : 'AM';
+            let dat = new Date().getDate();
+            let mon = new Date().getMonth();
+            let y = new Date().getFullYear();
+
+            if (h > 12) {
+                h = h - 12;
+            }
+
+            h = (h < 10 ? "0" + h : h);
+            m = (m < 10 ? "0" + m : m);
+            s = (s < 10 ? "0" + s : s);
+            dat = (dat < 10 ? "0" + dat : dat);
+
+            day.innerHTML = weekday[d];
+            hours.innerHTML = h + "<br><span>Hours</span>";
+            minutes.innerHTML = m + "<br><span>Minutes</span>";
+            seconds.innerHTML = s + "<br><span>Seconds</span>";
+            apm.innerHTML = am;
+            date.innerHTML = dat;
+            month.innerHTML = Months[mon];
+            year.innerHTML = y;
+
+            hh.style.strokeDashoffset = 440 - (440 * h) / 12;
+            mm.style.strokeDashoffset = 440 - (440 * m) / 60;
+            ss.style.strokeDashoffset = 440 - (440 * s) / 60;
+
+            hr_dot.style.transform = `rotate(${h * 30}deg)`;
+            min_dot.style.transform = `rotate(${m * 6}deg)`;
+            sec_dot.style.transform = `rotate(${s * 6}deg)`;
+        }, 1000);
+
+    </script>
+</body>
+
+</html>
